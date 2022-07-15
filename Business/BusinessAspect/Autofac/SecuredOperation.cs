@@ -8,9 +8,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.Extensions.DependencyInjection;
+using Core.Extensions;
 
 namespace Business.BusinessAspect.Autofac
 {
+    //JWT
     public class SecuredOperation : MethodInterception
     {
         private string[] _roles;

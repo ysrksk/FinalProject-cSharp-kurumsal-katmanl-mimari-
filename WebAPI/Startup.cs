@@ -42,7 +42,7 @@ namespace WebAPI
             //services.AddSingleton<IProductService, ProductManager>();
             //services.AddTransient<IProductDal, EfProductDal>();
 
-
+            //services.AddCors();
 
             var tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
 
@@ -60,6 +60,7 @@ namespace WebAPI
                         IssuerSigningKey = SecurityKeyHelper.CreateSecurityKey(tokenOptions.SecurityKey)
                     };
                 });
+
             services.AddDependencyResolvers(new ICoreModule[] {
                 new CoreModule()
              }) ;

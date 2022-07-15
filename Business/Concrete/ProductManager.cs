@@ -3,6 +3,7 @@ using Business.BusinessAspect.Autofac;
 using Business.CCS;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Caching;
 using Core.AspectS.Autofac.Validation;
 using Core.Utulities.Business;
 using Core.Utulities.Results;
@@ -27,7 +28,8 @@ namespace Business.Concrete
             _categoryService = categoryService;
         }
 
-        [SecuredOperation("product.add,admin")]
+        [CacheAspect]
+        [SecuredOperation("admin")]
         [ValidationAspect(typeof(ProductValidator))]
         public IResult Add(Product product)
         {
@@ -42,6 +44,7 @@ namespace Business.Concrete
 
         }
 
+        [CacheAspect]
         public IDataResult<List<Product>> GetAll()
         {
             if (DateTime.Now.Hour == 22)
@@ -52,6 +55,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Product>>(_productDal.GetAll(), Messages.ProductListed);
         }
 
+        [CacheAspect]
         public IDataResult<List<Product>> GetAllByCategoryId(int id)
         {
             return new SuccessDataResult<List<Product>>(_productDal.GetAll(p => p.CategoryId == id));

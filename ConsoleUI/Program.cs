@@ -2,6 +2,7 @@
 using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.InMemory;
 using System;
+using System.Linq;
 
 namespace ConsoleUI
 {
@@ -9,8 +10,23 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            ProductTest();
+            //ProductTest();
             //CategoryTest();
+
+
+            UserManager userManager = new UserManager(new EfUserDal());
+            var result1 = userManager.Get(2).Data;
+
+            foreach (var item in result1)
+            {
+                Console.WriteLine(item);
+            }
+
+            //var result = userManager.GetClaims(result1)
+            //foreach (var item in result)
+            //{
+            //    Console.WriteLine(item);
+            //}
 
         }
 
